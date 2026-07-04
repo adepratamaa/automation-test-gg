@@ -1,6 +1,6 @@
-# Eklipse.gg Test Automation
+# Test Automation
 
-Playwright + TypeScript UI automation framework for Eklipse.gg using the Page Object Model pattern.
+Playwright + TypeScript UI automation framework
 
 ## Prerequisites
 
