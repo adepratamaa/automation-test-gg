@@ -93,10 +93,7 @@ Before running the workflow in GitHub Actions, add these repository secrets:
 
 - `EMAIL`
 - `PASSWORD`
-
-The workflow already defines:
-
-- `LANDING_URL=https://eklipse.gg/`
-- `LOGIN_URL=https://app.eklipse.gg/login`
+- `LANDING_URL`
+- `LOGIN_URL`
 
 GitHub Actions will install dependencies, install Chromium, run the Playwright tests, and upload the Playwright HTML report as an artifact.
