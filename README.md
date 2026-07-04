@@ -2,13 +2,81 @@
 
 Playwright + TypeScript UI automation framework for Eklipse.gg using the Page Object Model pattern.
 
-## Structure
+## Prerequisites
+
+- Node.js 20 or newer
+- npm
+- Git
+
+## Clone Repository
+
+```bash
+git clone https://github.com/adepratamaa/automation-test-gg.git
+cd automation-test-gg
+```
+
+## Install Dependencies
+
+```bash
+npm install
+```
+
+## Install Playwright Browser
+
+```bash
+npx playwright install chromium
+```
+
+## Setup Environment File
+
+Copy the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Update `.env` with your test account:
+
+```bash
+LANDING_URL=https://eklipse.gg/
+LOGIN_URL=https://app.eklipse.gg/login
+EMAIL=your-email@example.com
+PASSWORD=your-password
+```
+
+## Run Tests
+
+Run all tests:
+
+```bash
+npm run test
+```
+
+Run tests with browser visible:
+
+```bash
+npm run test:headed
+```
+
+Run one test file:
+
+```bash
+npx playwright test tests/landing.spec.ts --browser=chromium
+```
+
+## Open Playwright Report
+
+```bash
+npm run report
+```
+
+## Project Structure
 
 - `playwright.config.ts` contains Playwright test configuration.
 - `src/pages` contains Page Object Model classes.
-- `src/data` contains test data.
 - `src/config` contains environment helpers.
 - `tests` contains the test specifications.
+- `.github/workflows/playwright.yaml` contains the GitHub Actions workflow.
 
 ## Implemented Test Cases
 
@@ -19,23 +87,16 @@ Playwright + TypeScript UI automation framework for Eklipse.gg using the Page Ob
 - `TC-SET-002`: Verify Profile section and can edit the name
 - `TC-TT-002`: Verify Twitch or Kick clip URL validation
 
-## Setup
+## GitHub Actions Setup
 
-```bash
-npm install
-npx playwright install chromium
-```
+Before running the workflow in GitHub Actions, add these repository secrets:
 
-Copy `.env.example` to `.env` and update `LANDING_URL`, `LOGIN_URL`, `EMAIL`, and `PASSWORD`.
+- `EMAIL`
+- `PASSWORD`
 
-## Run Tests
+The workflow already defines:
 
-```bash
-npm run test
-```
+- `LANDING_URL=https://eklipse.gg/`
+- `LOGIN_URL=https://app.eklipse.gg/login`
 
-## Open Report
-
-```bash
-npm run report
-```
+GitHub Actions will install dependencies, install Chromium, run the Playwright tests, and upload the Playwright HTML report as an artifact.
