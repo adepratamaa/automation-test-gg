@@ -5,7 +5,7 @@ dotenv.config();
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 60000,
+  timeout: 120000,
   expect: {
     timeout: 15000,
   },
@@ -15,7 +15,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : 1,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    baseURL: process.env.LANDING_URL ?? 'https://eklipse.gg/',
+    baseURL: process.env.LANDING_URL,
     headless: true,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',

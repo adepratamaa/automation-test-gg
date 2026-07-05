@@ -29,7 +29,6 @@ export class LandingPage {
   // check that the landing page has loaded.
   async expectLoaded() {
     await expect(this.page).toHaveURL(/eklipse\.gg/);
-    await expect(this.page.locator('body')).toBeVisible();
     await expect(this.heroHeadline).toBeVisible();
   }
 

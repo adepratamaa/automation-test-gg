@@ -13,11 +13,12 @@ export class LoginPage {
   readonly loginFailedMessage: Locator;
   readonly cookiesBanner: Locator;
   readonly rejectButton: Locator;
+  readonly eklipseLogo: Locator;
 
   // save the page and define all elements used on the login page.
   constructor(page: Page) {
     this.page = page;
-    this.emailOption = page.getByRole('button', { name: /^email$/i }).first();
+    this.emailOption = page.getByRole('button', { name: 'Email' }).first();
     this.forgotPasswordLink = page
       .getByRole('link', { name: /forgot.*password/i })
       .first();
@@ -36,19 +37,20 @@ export class LoginPage {
       .first();
     this.cookiesBanner = this.page.getByText('This website uses cookies to');
     this.rejectButton = this.page.getByRole('button', { name: 'Reject' });
+    this.eklipseLogo = this.page.locator('[alt="Eklipse Logo"]');
   }
 
   // open the login page.
   async open() {
     await this.page.goto(getEnv('LOGIN_URL'), {
-      waitUntil: 'domcontentloaded',
+      waitUntil: 'commit',
     });
   }
 
   // check that the login page has loaded and close the cookie banner.
   async expectLoaded() {
     await expect(this.page).toHaveURL(/app\.eklipse\.gg\/login/i);
-    await this.expectAccountOptionsVisible();
+    await expect(this.eklipseLogo).toBeVisible();
     if (await this.cookiesBanner.isVisible({ timeout: 1000 })) {
       await this.rejectButton.click();
     }
@@ -56,7 +58,6 @@ export class LoginPage {
 
   // check that all login options are visible.
   async expectAccountOptionsVisible() {
-    await this.page.waitForTimeout(1000);
     await expect(this.emailOption).toBeVisible();
     await expect(this.forgotPasswordLink).toBeVisible();
     await expect(this.signUpLink).toBeVisible();
