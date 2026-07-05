@@ -3,11 +3,6 @@ import { getEnv } from '../config/env';
 
 export class LoginPage {
   readonly page: Page;
-  readonly twitchOption: Locator;
-  readonly googleOption: Locator;
-  readonly kickOption: Locator;
-  readonly facebookOption: Locator;
-  readonly xboxOption: Locator;
   readonly emailOption: Locator;
   readonly forgotPasswordLink: Locator;
   readonly signUpLink: Locator;
@@ -22,13 +17,6 @@ export class LoginPage {
   // save the page and define all elements used on the login page.
   constructor(page: Page) {
     this.page = page;
-    this.twitchOption = page.getByRole('button', { name: /twitch/i }).first();
-    this.googleOption = page.getByRole('button', { name: /google/i }).first();
-    this.kickOption = page.getByRole('button', { name: /kick/i }).first();
-    this.facebookOption = page
-      .getByRole('button', { name: /facebook/i })
-      .first();
-    this.xboxOption = page.getByRole('button', { name: /xbox/i }).first();
     this.emailOption = page.getByRole('button', { name: /^email$/i }).first();
     this.forgotPasswordLink = page
       .getByRole('link', { name: /forgot.*password/i })
@@ -69,11 +57,6 @@ export class LoginPage {
 
   // check that all login options are visible.
   async expectAccountOptionsVisible() {
-    await expect(this.twitchOption).toBeVisible();
-    await expect(this.googleOption).toBeVisible();
-    await expect(this.kickOption).toBeVisible();
-    await expect(this.facebookOption).toBeVisible();
-    await expect(this.xboxOption).toBeVisible();
     await expect(this.emailOption).toBeVisible();
     await expect(this.forgotPasswordLink).toBeVisible();
     await expect(this.signUpLink).toBeVisible();
