@@ -8,6 +8,7 @@ export class HomePage {
   readonly notConnectedState: Locator;
   readonly connectManuallyText: Locator;
   readonly connectNewAccountTitle: Locator;
+  readonly settingsOption: Locator;
 
   // save the page and define all elements used on the home page.
   constructor(page: Page) {
@@ -22,6 +23,7 @@ export class HomePage {
       .getByText(/connect or add new stream manually/i)
       .first();
     this.connectNewAccountTitle = page.getByText(/connect a new account/i);
+    this.settingsOption = page.locator('#mySidebar .bottom-bar .select-none');
   }
 
   // check that the home page has loaded.

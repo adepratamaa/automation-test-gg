@@ -1,4 +1,5 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { faker } from '@faker-js/faker';
 import { getEnv } from '../src/config/env';
 import { HomePage } from '../src/pages/HomePage';
 import { LoginPage } from '../src/pages/LoginPage';
@@ -17,7 +18,14 @@ test.describe('Account settings', () => {
     await loginPage.loginWithEmail(getEnv('EMAIL'), getEnv('PASSWORD'));
     await homePage.expectLoaded();
 
-    await settingsPage.openProfile();
+    await homePage.settingsOption.click();
+    await expect(settingsPage.profileTab).toBeVisible();
+    await settingsPage.profileTab.click();
     await settingsPage.expectProfileLoaded(getEnv('EMAIL'));
+
+    const updatedName = faker.internet.username();
+
+    await settingsPage.updateName(updatedName);
+    await settingsPage.expectNameValue(updatedName);
   });
 });

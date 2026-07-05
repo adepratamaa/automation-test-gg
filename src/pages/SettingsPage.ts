@@ -25,22 +25,13 @@ export class SettingsPage {
     this.nameInput = page.getByPlaceholder('Enter your name');
     this.continueButton = page.getByRole('button', { name: /^continue$/i });
     this.cancelButton = page.getByRole('button', { name: /^cancel$/i });
-    this.communitySettingsTitle = page
-      .getByText(/community settings/i)
-      .first();
+    this.communitySettingsTitle = page.getByText(/community settings/i).first();
     this.notificationToggle = page.getByRole('switch', {
       name: /enable notifications/i,
     });
     this.deleteAccountButton = page
       .getByRole('button', { name: /^delete account$/i })
       .last();
-  }
-
-  // open the profile section in account settings.
-  async openProfile() {
-    await this.page.goto('https://app.eklipse.gg/account#profile', {
-      waitUntil: 'domcontentloaded',
-    });
   }
 
   // check that the profile page and profile data are visible.
@@ -58,15 +49,6 @@ export class SettingsPage {
     await expect(this.deleteAccountButton).toBeVisible();
   }
 
-  // open the edit name form and read the current name.
-  async readNameFromEditForm() {
-    await this.openEditNameForm();
-    const currentName = await this.nameInput.inputValue();
-    await this.cancelButton.click();
-
-    return currentName;
-  }
-
   // update the profile name and wait until the form closes.
   async updateName(name: string) {
     await this.openEditNameForm();
@@ -77,7 +59,9 @@ export class SettingsPage {
 
   // check that the updated name is visible on the page.
   async expectNameValue(name: string) {
-    await expect(this.page.getByText(name, { exact: true }).first()).toBeVisible();
+    await expect(
+      this.page.getByText(name, { exact: true }).first(),
+    ).toBeVisible();
   }
 
   // open the edit name form.

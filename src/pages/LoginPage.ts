@@ -48,7 +48,7 @@ export class LoginPage {
   // check that the login page has loaded and close the cookie banner.
   async expectLoaded() {
     await expect(this.page).toHaveURL(/app\.eklipse\.gg\/login/i);
-    await expect(this.page.locator('body')).toBeVisible();
+    await this.page.waitForLoadState('domcontentloaded');
     await this.expectAccountOptionsVisible();
     if (await this.cookiesBanner.isVisible({ timeout: 1000 })) {
       await this.rejectButton.click();

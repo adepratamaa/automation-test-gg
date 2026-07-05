@@ -8,6 +8,7 @@
     "report": "playwright show-report"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
     "@playwright/test": "^1.61.1",
     "@types/node": "^25.0.0",
     "dotenv": "^17.2.3",
