@@ -61,8 +61,8 @@ export class LoginPage {
   async expectLoaded() {
     await expect(this.page).toHaveURL(/app\.eklipse\.gg\/login/i);
     await expect(this.page.locator('body')).toBeVisible();
-
-    if (await this.cookiesBanner.isVisible()) {
+    await this.expectAccountOptionsVisible();
+    if (await this.cookiesBanner.isVisible({ timeout: 1000 })) {
       await this.rejectButton.click();
     }
   }
