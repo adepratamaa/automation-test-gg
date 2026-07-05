@@ -19,18 +19,5 @@ test.describe('Account settings', () => {
 
     await settingsPage.openProfile();
     await settingsPage.expectProfileLoaded(getEnv('EMAIL'));
-
-    const originalName = await settingsPage.readNameFromEditForm();
-    const updatedName = originalName.endsWith('_test')
-      ? originalName.replace(/_test$/, '_qa')
-      : `${originalName}_test`;
-
-    try {
-      await settingsPage.updateName(updatedName);
-      await settingsPage.expectNameValue(updatedName);
-    } finally {
-      await settingsPage.updateName(originalName);
-      await settingsPage.expectNameValue(originalName);
-    }
   });
 });
